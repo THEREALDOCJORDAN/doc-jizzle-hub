@@ -2,26 +2,479 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Doc Jizzle Hub</title>
-    <style>
-        body { font-family: sans-serif; padding: 40px; line-height: 1.6; max-width: 800px; margin: auto; }
-        h1 { border-bottom: 2px solid #333; padding-bottom: 10px; }
-        ul { list-style: none; padding: 0; }
-        li { margin: 15px 0; font-size: 1.2em; }
-        a { text-decoration: none; color: #007bff; font-weight: bold; }
-        a:hover { text-decoration: underline; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doc Jordan - Metaphysician & Visionary</title>
+    <meta name="description" content="Official website of Doc Jordan - Metaphysician, Visionary, Author, and Speaker. Explore books, music, urban clothing, podcasts, and more.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Doc Jizzle Resource Hub</h1>
+    <!-- Cosmic Background -->
+    <div class="cosmic-bg"></div>
     
-    <h2>Music Collection</h2>
-    <ul>
-        <li><a href="After-Henny.mp3">After Henny</a></li>
-    </ul>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="galaxy galaxy-left"></div>
+        <div class="header-content">
+            <h1 class="main-title">DOC JORDAN</h1>
+            <p class="subtitle">METAPHYSICIAN & VISIONARY</p>
+        </div>
+        <div class="galaxy galaxy-right"></div>
+    </header>
 
-    <h2>Clothing Collection</h2>
-    <ul>
-        </ul>
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <a href="#about" class="nav-btn">ABOUT</a>
+        <a href="#books" class="nav-btn">BOOKS BY DOC</a>
+        <a href="#bookclub" class="nav-btn">528 BOOK CLUB</a>
+        <a href="#music" class="nav-btn">MUSIC BY DOC</a>
+        <a href="#hotmixes" class="nav-btn">DOC'S HOTMIXES</a>
+        <a href="#clothing" class="nav-btn">DOC JORDAN URBAN CLOTHING</a>
+        <a href="#homeoffice" class="nav-btn">HOME AND OFFICE</a>
+        <a href="#supplements" class="nav-btn">TITAN SUPPLEMENTS</a>
+        <a href="#podcast" class="nav-btn">PODCAST</a>
+        <a href="#speaking" class="nav-btn">SPEAKING ENGAGEMENTS</a>
+        <a href="#community" class="nav-btn">COMMUNITY</a>
+        <a href="#underdog" class="nav-btn">UNDERDOG PRODUCTIONS</a>
+        <a href="#contact" class="nav-btn">CONTACT INFO</a>
+    </nav>
+
+    <!-- Hero Carousel -->
+    <section class="hero-carousel">
+        <button class="carousel-btn prev" onclick="moveSlide(-1)">&#10094;</button>
+        <div class="carousel-container">
+            <div class="carousel-track">
+                <div class="carousel-slide">
+                    <img src="./assets/books_collage.png" alt="Books by Doc Jordan" style="width: 100%; aspect-ratio: 3/4; object-fit: cover;">
+                </div>
+                <div class="carousel-slide">
+                    <img src="./assets/bed_sheets.jpg" alt="Alkami Luxury Bed Sheets" style="width: 100%; aspect-ratio: 3/4; object-fit: cover;">
+                </div>
+                <div class="carousel-slide">
+                    <img src="./assets/blue_mannequin_walking_dog.jpg" alt="Alkami Blue Marble Mannequin and Dog" style="width: 100%; aspect-ratio: 3/4; object-fit: cover;">
+                </div>
+                <div class="carousel-slide active highlight">
+                    <img src="./assets/titan_holistic_health.jpg" alt="Titan Holistic Health Supplements" style="width: 100%; aspect-ratio: 3/4; object-fit: cover;">
+                </div>
+                <div class="carousel-slide">
+                    <img src="./assets/skid_row_camo.jpg" alt="Skid Row Camo Tracksuit" style="width: 100%; aspect-ratio: 3/4; object-fit: cover;">
+                </div>
+                <div class="carousel-slide">
+                    <img src="./assets/diva_purple_gold.png" alt="Diva Purple & Gold Tracksuit" style="width: 100%; aspect-ratio: 3/4; object-fit: cover;">
+                </div>
+                <div class="carousel-slide">
+                    <img src="./assets/top_banner.jpg" alt="Doc Jordan International Clothing" style="width: 100%; aspect-ratio: 3/4; object-fit: cover;">
+                </div>
+                <div class="carousel-slide">
+                    <img src="./assets/matching_dog_tracksuit.jpg" alt="Companion Walking Set" style="width: 100%; aspect-ratio: 3/4; object-fit: cover;">
+                </div>
+            </div>
+        </div>
+        <button class="carousel-btn next" onclick="moveSlide(1)">&#10095;</button>
+        <div class="carousel-dots">
+            <span class="dot" onclick="currentSlide(0)"></span>
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot active" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+            <span class="dot" onclick="currentSlide(5)"></span>
+            <span class="dot" onclick="currentSlide(6)"></span>
+            <span class="dot" onclick="currentSlide(7)"></span>
+        </div>
+    </section>
+
+    <!-- Main Content Grid -->
+    <main class="content-grid">
+        <!-- About Section -->
+        <section id="about" class="content-card">
+            <h2 class="section-title">ABOUT</h2>
+            <div class="section-content">
+                <p>Doc Jordan is a visionary metaphysician blending ancient wisdom with modern spirituality. His transformative teachings empower individuals to unlock their highest potential and live authentically.</p>
+                <p>He teaches us profound wake stillness of consciousness within treasured timeless theories. Explore time and awaken the quantitative deepening of our source - truly to be accepted hearted. His action has shown and been demonstrated globally among all ancestral community.</p>
+                <p>You sometimes go through past themes, dreamscape, friends, and most importantly awaken to drama - being empowered and consciously connected.</p>
+            </div>
+        </section>
+
+        <!-- Books Section -->
+        <section id="books" class="content-card">
+            <h2 class="section-title">BOOKS BY DOC</h2>
+            <div style="text-align: center; margin-bottom: 25px;">
+                <img src="./assets/books_collage.png" alt="Doc Jordan Books Collage" style="max-height: 250px; width: auto; margin: 0 auto; display: block; border-radius: 10px; border: 2px solid var(--neon-cyan); box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);">
+            </div>
+            <div class="books-grid">
+                <div class="book-item">
+                    <div class="placeholder-img-small" style="background: linear-gradient(135deg, #0a0a1f, #ff0080); color: #FFF; font-size: 11px;">The Energy of Addiction</div>
+                    <p class="book-title">The Energy of Addiction</p>
+                </div>
+                <div class="book-item">
+                    <div class="placeholder-img-small" style="background: linear-gradient(135deg, #0a0a1f, #00ffff); color: #FFF; font-size: 11px;">Diagnosing Emotions</div>
+                    <p class="book-title">Diagnosing Emotions</p>
+                </div>
+                <div class="book-item">
+                    <div class="placeholder-img-small" style="background: linear-gradient(135deg, #0a0a1f, #b800ff); color: #FFF; font-size: 11px;">Change Your Vibe</div>
+                    <p class="book-title">Change Your Vibe Change Your Life</p>
+                </div>
+                <div class="book-item">
+                    <div class="placeholder-img-small" style="background: linear-gradient(135deg, #0a0a1f, #00d9ff); color: #FFF; font-size: 11px;">Addiction & Recovery</div>
+                    <p class="book-title">Word Search Book</p>
+                </div>
+            </div>
+            <p class="order-info">ORDER ONLINE AT<br><strong>WWW.ENERGYFADDICTION.COM</strong></p>
+        </section>
+
+        <!-- 528 Book Club Section -->
+        <section id="bookclub" class="content-card">
+            <h2 class="section-title">528 BOOK CLUB</h2>
+            <div style="text-align: center; margin-bottom: 20px;">
+                <img src="./assets/books_collage.png" alt="528 Book Club" style="max-height: 250px; width: auto; margin: 0 auto; display: block; border-radius: 10px; border: 2px solid var(--neon-cyan); box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);">
+            </div>
+            <div class="section-content">
+                <p>Awaken your consciousness and expand your frequency with literature handpicked by Doc Jordan. The 528 Book Club focuses on high-vibrational knowledge, spiritual elevation, and scientific truths that empower you to change your vibe and change your life.</p>
+                <p style="text-align: center; font-weight: bold; margin-top: 15px; color: var(--neon-pink);">JOIN THE LITERARY MOVEMENT</p>
+            </div>
+        </section>
+
+        <!-- Music Section -->
+        <section id="music" class="content-card">
+            <h2 class="section-title">MUSIC BY DOC</h2>
+            <div class="music-list">
+                <div class="music-item">
+                    <div class="placeholder-img-small">Album</div>
+                    <div class="music-info">
+                        <p class="track-title">Doc Jordan</p>
+                        <p class="track-subtitle">Solo Album</p>
+                        <button class="listen-btn">Listen Now</button>
+                    </div>
+                </div>
+                <div class="music-item">
+                    <div class="placeholder-img-small">Album</div>
+                    <div class="music-info">
+                        <p class="track-title">Docs FranticState</p>
+                        <p class="track-subtitle">Album</p>
+                        <button class="listen-btn">Listen Now</button>
+                    </div>
+                </div>
+                <div class="music-item">
+                    <div class="placeholder-img-small">Album</div>
+                    <div class="music-info">
+                        <p class="track-title">How To Measure Grief</p>
+                        <p class="track-subtitle">Solo Endeavor</p>
+                        <button class="listen-btn">Listen Now</button>
+                    </div>
+                </div>
+                <div class="music-item">
+                    <div class="placeholder-img-small">Album</div>
+                    <div class="music-info">
+                        <p class="track-title">Doc Jamison</p>
+                        <p class="track-subtitle">Solo Endeavorz</p>
+                        <button class="listen-btn">Listen Now</button>
+                    </div>
+                </div>
+                <div class="music-item">
+                    <div class="placeholder-img-small">Album</div>
+                    <div class="music-info">
+                        <p class="track-title">Quinn Bundwz</p>
+                        <p class="track-subtitle">Solo Endeavorz</p>
+                        <button class="listen-btn">Listen Now</button>
+                    </div>
+                </div>
+                <div class="music-item">
+                    <div class="placeholder-img-small">Album</div>
+                    <div class="music-info">
+                        <p class="track-title">Warriors</p>
+                        <p class="track-subtitle">Solo Endeavorz</p>
+                        <button class="listen-btn">Listen Now</button>
+                    </div>
+                </div>
+                <div class="music-item">
+                    <div class="placeholder-img-small">Album</div>
+                    <div class="music-info">
+                        <p class="track-title">Dom64</p>
+                        <p class="track-subtitle">Observations</p>
+                        <button class="listen-btn">Listen Now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Doc's Hotmixes Section -->
+        <section id="hotmixes" class="content-card">
+            <h2 class="section-title">DOC'S HOTMIXES</h2>
+            <div class="music-list">
+                <div class="music-item">
+                    <div class="play-icon">▶</div>
+                    <div class="music-info">
+                        <p class="track-title">Metaphysical Deep Space Mix</p>
+                        <p class="track-subtitle">High-frequency cosmic rhythms & ambient beats</p>
+                        <button class="listen-btn">Listen Now</button>
+                    </div>
+                </div>
+                <div class="music-item">
+                    <div class="play-icon">▶</div>
+                    <div class="music-info">
+                        <p class="track-title">Skid Row Royalty Sessions</p>
+                        <p class="track-subtitle">Urban street beats mixed with soulful frequencies</p>
+                        <button class="listen-btn">Listen Now</button>
+                    </div>
+                </div>
+                <div class="music-item">
+                    <div class="play-icon">▶</div>
+                    <div class="music-info">
+                        <p class="track-title">528Hz DNA Healing Vibes</p>
+                        <p class="track-subtitle">Meditation flow & quantum focus ambient soundscapes</p>
+                        <button class="listen-btn">Listen Now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Clothing Section -->
+        <section id="clothing" class="content-card">
+            <h2 class="section-title">DOC JORDAN URBAN CLOTHING</h2>
+            <div class="clothing-grid">
+                <div class="clothing-item">
+                    <img src="./assets/skid_row_camo.jpg" alt="Skid Row Camo Tracksuit" style="width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 8px; border: 1px solid var(--neon-cyan);">
+                </div>
+                <div class="clothing-item">
+                    <img src="./assets/skid_row_white_gold.jpg" alt="Skid Row White & Gold Tracksuit" style="width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 8px; border: 1px solid var(--neon-cyan);">
+                </div>
+                <div class="clothing-item">
+                    <img src="./assets/skid_row_varsity.jpg" alt="Skid Row Varsity Jacket" style="width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 8px; border: 1px solid var(--neon-cyan);">
+                </div>
+                <div class="clothing-item">
+                    <img src="./assets/diva_purple_gold.png" alt="Diva Purple & Gold Tracksuit" style="width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 8px; border: 1px solid var(--neon-cyan);">
+                </div>
+                <div class="clothing-item">
+                    <img src="./assets/diva_cali_crop.png" alt="Diva Cali Crop Top" style="width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 8px; border: 1px solid var(--neon-cyan);">
+                </div>
+                <div class="clothing-item">
+                    <img src="./assets/blue_mannequin_walking_dog.jpg" alt="Alkami Blue Mannequin Walking Dog" style="width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 8px; border: 1px solid var(--neon-cyan);">
+                </div>
+                <div class="clothing-item">
+                    <img src="./assets/blue_marble_tracksuit.jpg" alt="Alkami Blue Marble Tracksuit" style="width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 8px; border: 1px solid var(--neon-cyan);">
+                </div>
+                <div class="clothing-item">
+                    <img src="./assets/matching_dog_tracksuit.jpg" alt="Alkami Companion Tracksuit" style="width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 8px; border: 1px solid var(--neon-cyan);">
+                </div>
+                <div class="clothing-item">
+                    <img src="./assets/gold_geometry_tee.jpg" alt="Alkami Gold Geometry Tee" style="width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 8px; border: 1px solid var(--neon-cyan);">
+                </div>
+                <div class="clothing-item">
+                    <img src="./assets/top_banner.jpg" alt="Doc Jordan International Clothing" style="width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 8px; border: 1px solid var(--neon-cyan);">
+                </div>
+            </div>
+            <div class="shop-buttons">
+                <button class="shop-btn">Shop Now</button>
+                <button class="shop-btn">Shop Now</button>
+            </div>
+        </section>
+
+        <!-- Home and Office Section -->
+        <section id="homeoffice" class="content-card">
+            <h2 class="section-title">HOME AND OFFICE</h2>
+            <div style="text-align: center; margin-bottom: 20px;">
+                <img src="./assets/bed_sheets.jpg" alt="Alkami Home & Office Luxury Bedding" style="max-height: 250px; width: auto; margin: 0 auto; display: block; border-radius: 10px; border: 2px solid var(--neon-cyan); box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);">
+            </div>
+            <div class="section-content">
+                <p>Encircle your living and work spaces in high-vibrational energy. Our Home and Office collection features custom bedding, sacred geometry art, and lifestyle essentials that align your environment with supreme reality.</p>
+                <p style="text-align: center; font-weight: bold; margin-top: 15px; color: var(--neon-cyan);">ELEVATE YOUR SPACE</p>
+            </div>
+        </section>
+
+        <!-- Titan Supplements Section -->
+        <section id="supplements" class="content-card">
+            <h2 class="section-title">TITAN SUPPLEMENTS</h2>
+            <div style="text-align: center; margin-bottom: 20px;">
+                <img src="./assets/titan_holistic_health.jpg" alt="Titan Holistic Health Supplements" style="max-height: 200px; width: auto; margin: 0 auto; display: block; border-radius: 10px; border: 2px solid var(--neon-cyan); box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);">
+            </div>
+            <div class="section-content">
+                <p>Optimize your biological vessel. Titan Holistic Health offers premium Sea Moss, Hair Vitamin Gummies, and Sleep Well Gummies crafted to nurture physical health, support cognitive clarity, and synchronize body frequencies.</p>
+                <p style="text-align: center; font-weight: bold; margin-top: 15px; color: var(--neon-pink);">OPTIMIZE YOUR HEALTH</p>
+            </div>
+        </section>
+
+        <!-- Podcast Section -->
+        <section id="podcast" class="content-card">
+            <h2 class="section-title">PODCAST</h2>
+            <div class="podcast-list">
+                <div class="podcast-episode">
+                    <div class="play-icon">▶</div>
+                    <div class="episode-info">
+                        <p class="episode-number">Episode 2</p>
+                        <p class="episode-title">The Levi/Learn Episode</p>
+                        <p class="episode-desc">The hardest white some insights seen on oracle disciplines of witnessing our supreme reality...</p>
+                    </div>
+                    <button class="play-btn">▶ Play</button>
+                </div>
+                <div class="podcast-episode">
+                    <div class="play-icon">▶</div>
+                    <div class="episode-info">
+                        <p class="episode-number">Episode 2</p>
+                        <p class="episode-title">The Mo'Thanasky Episode</p>
+                        <p class="episode-desc">This tells the story of Episode on young life and probability far forward...</p>
+                    </div>
+                    <button class="play-btn">▶ Play</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Speaking Engagements Section -->
+        <section id="speaking" class="content-card">
+            <h2 class="section-title">UPCOMING SPEAKING ENGAGEMENTS</h2>
+            <div class="events-list">
+                <div class="event-item">
+                    <div class="event-date">
+                        <p class="date-month">September 30</p>
+                        <p class="date-time">2:30 pm</p>
+                    </div>
+                    <div class="event-details">
+                        <p class="event-title">Doc Jordan Industry Cleaners</p>
+                        <p class="event-location">Portland, Ashland, OR</p>
+                    </div>
+                    <button class="rsvp-btn">RSVP</button>
+                </div>
+                <div class="event-item">
+                    <div class="event-date">
+                        <p class="date-month">September 22</p>
+                        <p class="date-time">7:00 pm</p>
+                    </div>
+                    <div class="event-details">
+                        <p class="event-title">Doc Jordan Endless Cleaners</p>
+                        <p class="event-location">Oakland, Ashland, PA</p>
+                    </div>
+                    <button class="rsvp-btn">RSVP</button>
+                </div>
+                <div class="event-item">
+                    <div class="event-date">
+                        <p class="date-month">November 27</p>
+                        <p class="date-time">5:30 pm</p>
+                    </div>
+                    <div class="event-details">
+                        <p class="event-title">Sewayne Entamanco Proseloss</p>
+                        <p class="event-location">Atlanta, Noelleim, AL</p>
+                    </div>
+                    <button class="rsvp-btn">RSVP</button>
+                </div>
+                <div class="event-item">
+                    <div class="event-date">
+                        <p class="date-month">Wednesday 17</p>
+                        <p class="date-time">3:45 pm</p>
+                    </div>
+                    <div class="event-details">
+                        <p class="event-title">Flow Elevation</p>
+                        <p class="event-location">Flaglan, Heeled, SA</p>
+                    </div>
+                    <button class="rsvp-btn">RSVP</button>
+                </div>
+                <div class="event-item">
+                    <div class="event-date">
+                        <p class="date-month">Wednesday 18</p>
+                        <p class="date-time">5:30 pm</p>
+                    </div>
+                    <div class="event-details">
+                        <p class="event-title">Doc Jordan Center</p>
+                        <p class="event-location">Nonalon Healem, NV-Hda</p>
+                    </div>
+                    <button class="rsvp-btn">RSVP</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Community Involvement Section -->
+        <section id="community" class="content-card">
+            <h2 class="section-title">COMMUNITY INVOLVEMENT</h2>
+            <div class="community-grid">
+                <div class="community-img">
+                    <img src="./assets/skid_row_camo.jpg" alt="Community Event 1" style="width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; border: 1px solid var(--neon-cyan);">
+                </div>
+                <div class="community-img">
+                    <img src="./assets/diva_purple_gold.png" alt="Community Event 2" style="width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; border: 1px solid var(--neon-cyan);">
+                </div>
+                <div class="community-img">
+                    <img src="./assets/blue_mannequin_walking_dog.jpg" alt="Community Event 3" style="width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; border: 1px solid var(--neon-cyan);">
+                </div>
+                <div class="community-img">
+                    <img src="./assets/titan_supplements.jpg" alt="Community Event 4" style="width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; border: 1px solid var(--neon-cyan);">
+                </div>
+                <div class="community-img">
+                    <img src="./assets/skid_row_varsity.jpg" alt="Community Event 5" style="width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; border: 1px solid var(--neon-cyan);">
+                </div>
+                <div class="community-img">
+                    <img src="./assets/matching_dog_tracksuit.jpg" alt="Community Event 6" style="width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; border: 1px solid var(--neon-cyan);">
+                </div>
+            </div>
+        </section>
+
+        <!-- Underdog Productions Section -->
+        <section id="underdog" class="content-card">
+            <h2 class="section-title">UNDERDOG PRODUCTIONS</h2>
+            <div class="underdog-content">
+                <div class="underdog-item">
+                    <img src="./assets/top_banner.jpg" alt="Underdog Productions" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 10px; border: 2px solid var(--neon-purple); box-shadow: 0 0 15px rgba(184, 0, 255, 0.3);">
+                    <h3>UNDERDOG PRODUCTIONS</h3>
+                    <p>We are driven to enrich communities through storytelling, creative arts, and empowerment initiatives.</p>
+                    <button class="action-btn">Donate</button>
+                </div>
+                <div class="underdog-item" id="fundraising">
+                    <img src="./assets/blue_mannequin_walking_dog.jpg" alt="Fundraising Efforts" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 10px; border: 2px solid var(--neon-purple); box-shadow: 0 0 15px rgba(184, 0, 255, 0.3);">
+                    <h3>FUNDRAISING EFFORTS</h3>
+                    <p>Help us spread the movement! Contributing helps us empower more communities and amplify our mission.</p>
+                    <button class="action-btn">Donate</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="content-card">
+            <h2 class="section-title">CONTACT & SCHEDULING INFO.</h2>
+            <div class="contact-content">
+                <form class="contact-form">
+                    <input type="email" placeholder="E-mails" class="form-input">
+                    <input type="text" placeholder="Your Name" class="form-input">
+                    <input type="text" placeholder="Subject" class="form-input">
+                    <textarea placeholder="Message" class="form-textarea" rows="5"></textarea>
+                    <button type="submit" class="submit-btn">Form</button>
+                </form>
+                <div class="contact-info">
+                    <div class="calendar">
+                        <div class="calendar-header">
+                            <span>◀</span>
+                            <span>November 05/31</span>
+                            <span>▶</span>
+                        </div>
+                        <div class="calendar-grid">
+                            <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+                            <span></span><span></span><span></span><span></span><span></span><span>01</span><span>02</span>
+                            <span>03</span><span>04</span><span>05</span><span>06</span><span>07</span><span>08</span><span>09</span>
+                            <span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span>
+                            <span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span>
+                            <span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span>
+                        </div>
+                    </div>
+                    <div class="contact-details">
+                        <p>📞 (XXX) 352-6580</p>
+                        <p>📞 (XXX) 5858-5885</p>
+                        <p>✉️ energyfaddiction.com</p>
+                        <p>🌐 www.energyfadd.com</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <p>© 2024 DOC JORDAN. ALL RIGHTS RESERVED.</p>
+        <div class="social-links">
+            <a href="#" class="social-icon facebook" aria-label="Facebook">f</a>
+            <a href="#" class="social-icon instagram" aria-label="Instagram">📷</a>
+            <a href="#" class="social-icon twitter" aria-label="Twitter">🐦</a>
+            <a href="#" class="social-icon tiktok" aria-label="TikTok">♪</a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
