@@ -1,626 +1,494 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ALKAMI | Metaphysical Streetwear</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Space+Grotesk:wght@300;500;700&family=Cinzel:wght@700&family=Syncopate:wght@700&display=swap');
-
-    :root {
-      --bg-primary: #050505;
-      --bg-secondary: #0A0A0A;
-      --text-primary: #FFFFFF;
-      --text-secondary: #888888;
-      --accent-glow: #8A2BE2;
-      --accent-neon: #00FFFF;
-      --glass: rgba(255, 255, 255, 0.03);
-      --glass-border: rgba(255, 255, 255, 0.08);
-    }
-
-    body, html {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      background-color: var(--bg-primary);
-      color: var(--text-primary);
-      font-family: 'Inter', sans-serif;
-      overflow-x: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    /* Background Nebula Animation */
-    #nebula-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      opacity: 0.6;
-    }
-
-    header {
-      padding: 40px 20px;
-      font-family: 'Syncopate', sans-serif;
-      font-size: clamp(24px, 5vw, 36px);
-      letter-spacing: 12px;
-      text-align: center;
-      width: 100%;
-      text-transform: uppercase;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
-      z-index: 10;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 600px;
-      padding: 40px 24px;
-      box-sizing: border-box;
-      background: var(--glass);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--glass-border);
-      border-radius: 24px;
-      margin-top: 20px;
-      margin-bottom: 80px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-      z-index: 5;
-      animation: fadeIn 1s ease-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .mode-toggle {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 40px;
-    }
-
-    .chip {
-      padding: 10px 20px;
-      border-radius: 100px;
-      border: 1px solid var(--glass-border);
-      color: var(--text-secondary);
-      cursor: pointer;
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      background: transparent;
-    }
-
-    .chip:hover {
-      border-color: rgba(255,255,255,0.3);
-      color: var(--text-primary);
-    }
-
-    .chip.active {
-      border-color: var(--accent-glow);
-      background-color: rgba(138, 43, 226, 0.15);
-      color: var(--text-primary);
-      box-shadow: 0 0 20px rgba(138, 43, 226, 0.2);
-    }
-
-    .input-area {
-      margin-bottom: 32px;
-      position: relative;
-    }
-
-    input[type="text"] {
-      width: 100%;
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid var(--glass-border);
-      color: var(--text-primary);
-      padding: 12px 0;
-      font-size: 18px;
-      font-weight: 300;
-      outline: none;
-      font-family: 'Space Grotesk', sans-serif;
-      transition: all 0.3s;
-    }
-
-    input[type="text"]::placeholder {
-      color: #444;
-      font-style: italic;
-    }
-
-    input[type="text"]:focus {
-      border-bottom-color: var(--accent-glow);
-      box-shadow: 0 10px 10px -10px rgba(138, 43, 226, 0.3);
-    }
-
-    button.generate-btn {
-      width: 100%;
-      background: transparent;
-      border: 1px solid var(--accent-glow);
-      color: var(--text-primary);
-      padding: 18px;
-      font-size: 14px;
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      letter-spacing: 4px;
-      cursor: pointer;
-      transition: all 0.3s;
-      border-radius: 8px;
-      position: relative;
-      overflow: hidden;
-      text-transform: uppercase;
-    }
-
-    button.generate-btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-      transition: 0.5s;
-    }
-
-    button.generate-btn:hover::before {
-      left: 100%;
-    }
-
-    button.generate-btn:hover {
-      background: rgba(138, 43, 226, 0.1);
-      box-shadow: 0 0 30px rgba(138, 43, 226, 0.4);
-      transform: scale(1.02);
-    }
-
-    .loading-spinner {
-      display: none;
-      width: 24px;
-      height: 24px;
-      border: 2px solid rgba(255,255,255,0.1);
-      border-radius: 50%;
-      border-top-color: var(--accent-glow);
-      animation: spin 1s linear infinite;
-      margin: 0 auto;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    .mockup-container {
-      display: none;
-      margin-top: 50px;
-      text-align: center;
-      animation: reveal 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-    }
-
-    @keyframes reveal {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
-    }
-
-    .mockup-label {
-      font-size: 10px;
-      letter-spacing: 4px;
-      color: var(--text-secondary);
-      margin-bottom: 24px;
-      font-family: 'Space Grotesk', sans-serif;
-      text-transform: uppercase;
-    }
-
-    .hoodie-box {
-      width: 100%;
-      height: 500px;
-      background-color: #000;
-      border-radius: 16px;
-      position: relative;
-      overflow: hidden;
-      border: 1px solid var(--glass-border);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-image: radial-gradient(circle at center, #111 0%, #000 100%);
-    }
-
-    .hoodie-image {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      opacity: 0.9;
-      z-index: 2;
-      pointer-events: none;
-    }
-
-    .design-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: 1;
-      filter: contrast(1.2) brightness(1.1);
-      mix-blend-mode: screen;
-      animation: breath 8s infinite ease-in-out;
-    }
-
-    /* Zipper simulation */
-    .hoodie-box::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 50%;
-      width: 2px;
-      height: 100%;
-      background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.2), transparent);
-      z-index: 3;
-    }
-
-    @keyframes breath {
-      0%, 100% { opacity: 0.8; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.02); }
-    }
-
-    .checkout-btn {
-      width: 100%;
-      background: linear-gradient(45deg, var(--accent-glow), #4B0082);
-      color: var(--text-primary);
-      border: none;
-      padding: 20px;
-      font-size: 14px;
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      letter-spacing: 2px;
-      cursor: pointer;
-      border-radius: 8px;
-      margin-top: 40px;
-      transition: all 0.3s;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-      text-transform: uppercase;
-      box-sizing: border-box;
-    }
-
-    .checkout-btn:hover {
-      filter: brightness(1.2);
-      box-shadow: 0 15px 30px rgba(138, 43, 226, 0.4);
-      transform: translateY(-2px);
-    }
-
-    .footer-text {
-      margin-top: 40px;
-      font-size: 10px;
-      color: #333;
-      letter-spacing: 1px;
-    }
-
-    .vault-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 20px;
-      margin-top: 30px;
-    }
-    .vault-card {
-      background: var(--glass);
-      border: 1px solid var(--glass-border);
-      border-radius: 12px;
-      padding: 15px;
-      text-align: center;
-      transition: transform 0.3s;
-      cursor: pointer;
-    }
-    .vault-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--accent-glow);
-    }
-    .vault-thumb {
-      width: 100%;
-      aspect-ratio: 1;
-      border-radius: 8px;
-      background: #000;
-      object-fit: cover;
-      margin-bottom: 12px;
-    }
-    .vault-tag {
-      font-size: 9px;
-      letter-spacing: 2px;
-      color: var(--accent-neon);
-      text-transform: uppercase;
-    }
-    .vault-name {
-      font-size: 11px;
-      font-weight: 700;
-      margin-top: 4px;
-      letter-spacing: 1px;
-    }
-    .vault-section {
-      width: 100%;
-      margin-top: 60px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doc Jordan - Metaphysician & Visionary</title>
+    <meta name="description" content="Official website of Doc Jordan - Metaphysician, Visionary, Author, and Speaker. Explore books, music, urban clothing, podcasts, and more.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Cosmic Background -->
+    <div class="cosmic-bg"></div>
 
-  <canvas id="nebula-canvas"></canvas>
-
-  <header>DNT | DESIGN LAB</header>
-
-  <div class="container">
-    <div class="mode-toggle">
-      <div class="chip active" id="chip-visionary">The Visionary</div>
-      <div class="chip" id="chip-creator">The Creator</div>
-    </div>
-
-    <!-- The Visionary (Text) Mode Input -->
-    <div class="input-area" id="visionary-area">
-      <input type="text" id="prompt-input" placeholder="Manifest your DNT vision..." autocomplete="off">
-    </div>
-
-    <!-- The Creator (Sketch/Upload) Mode Input -->
-    <div class="input-area" id="creator-area" style="display: none; border: 1px dashed var(--glass-border); padding: 40px 20px; border-radius: 12px; text-align: center; cursor: pointer; background: var(--glass); transition: all 0.3s;" onmouseover="this.style.borderColor='var(--accent-neon)'" onmouseout="this.style.borderColor='var(--glass-border)'">
-      <div style="font-size: 32px; color: var(--accent-neon); margin-bottom: 12px;">?</div>
-      <div style="font-family: 'Space Grotesk', sans-serif; font-size: 13px; letter-spacing: 2px; color: var(--text-primary); text-transform: uppercase;">UPLOAD SKETCH OR TEXTURE</div>
-      <div style="font-size: 11px; color: var(--text-secondary); margin-top: 8px;">Supports PNG, JPG, or SVG</div>
-      <input type="file" id="file-input" style="display: none;" accept="image/*">
-    </div>
-
-    <button class="generate-btn" id="generate-btn">
-      <span id="btn-text">INITIALIZE RECALIBRATION</span>
-      <div class="loading-spinner" id="loading"></div>
-    </button>
-
-    <div class="mockup-container" id="mockup">
-      <div class="mockup-label">DNT VIBRATION RECALIBRATION | AOP FULL-ZIP</div>
-      <div class="hoodie-box">
-        <img src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Hoodie Base" class="hoodie-image">
-        <img src="" alt="Generated Design" class="design-overlay" id="generated-img">
-      </div>
-      
-      <!-- LIVE: Doc Jordan Passive Income CTA -->
-      <a href="https://docjordan.printify.me/" target="_blank" class="checkout-btn" id="shop-btn" style="text-decoration: none; display: block; text-align: center; line-height: 24px;">SHOP THIS COLLECTION ON PRINTIFY</a>
-      <div class="footer-text">OFFICIAL DOC JORDAN POP-UP STORE | PASSIVE FULFILLMENT ACTIVE</div>
-    </div>
-
-    <!-- Brand Vault Section -->
-    <div class="vault-section" id="vault">
-      <h2 style="font-family: 'Syncopate', sans-serif; letter-spacing: 4px; font-size: 14px; margin-top: 80px; text-align: center; color: var(--text-secondary);">THE FOUNDER'S VAULT</h2>
-      
-      <!-- Brand Filter Tabs -->
-      <div class="mode-toggle" style="margin-top: 20px; margin-bottom: 20px;">
-        <div class="chip active brand-chip" data-brand="all">ALL</div>
-        <div class="chip brand-chip" data-brand="Joe">JOE</div>
-        <div class="chip brand-chip" data-brand="Alkami">ALKAMI</div>
-        <div class="chip brand-chip" data-brand="Diva">DIVA</div>
-      </div>
-
-      <div class="vault-grid" id="vault-grid">
-        <!-- Collection items will be injected here -->
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // Nebula Background Animation
-    const canvas = document.getElementById('nebula-canvas');
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-
-    function initCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-
-    class Particle {
-      constructor() {
-        this.reset();
-      }
-      reset() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2 + 0.5;
-        this.speedX = (Math.random() - 0.5) * 0.2;
-        this.speedY = (Math.random() - 0.5) * 0.2;
-        this.opacity = Math.random() * 0.5;
-        this.color = Math.random() > 0.5 ? '#8A2BE2' : '#00FFFF';
-      }
-      update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-      }
-      draw() {
-        ctx.fillStyle = this.color;
-        ctx.globalAlpha = this.opacity;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
-
-    function createParticles() {
-      particles = [];
-      for (let i = 0; i < 100; i++) {
-        particles.push(new Particle());
-      }
-    }
-
-    function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => {
-        p.update();
-        p.draw();
-      });
-      requestAnimationFrame(animate);
-    }
-
-    window.addEventListener('resize', initCanvas);
-    initCanvas();
-    createParticles();
-    animate();
-
-    // LIVE ENGINE CONFIGURATION
-    const SUPABASE_PROJECT_URL = 'https://your-project-id.supabase.co';
-    const GENERATE_FUNCTION_URL = `${SUPABASE_PROJECT_URL}/functions/v1/generate-design`;
-
-    // UI Elements
-    const generateBtn = document.getElementById('generate-btn');
-    const btnText = document.getElementById('btn-text');
-    const loading = document.getElementById('loading');
-    const mockup = document.getElementById('mockup');
-    const generatedImg = document.getElementById('generated-img');
-    const promptInput = document.getElementById('prompt-input');
-    const checkoutBtn = document.getElementById('shop-btn'); // Corrected from 'checkout-btn'
-
-    // Mode Toggle elements
-    const chipVisionary = document.getElementById('chip-visionary');
-    const chipCreator = document.getElementById('chip-creator');
-    const visionaryArea = document.getElementById('visionary-area');
-    const creatorArea = document.getElementById('creator-area');
-    const fileInput = document.getElementById('file-input');
-
-    // Founder's Vault Data (Definitive Collection)
-    const founderCollection = [
-      { id: 'j1', brand: 'Joe', name: 'Concrete Resilience', img: 'https://images.unsplash.com/photo-1517511620798-cec17d428bc0?auto=format&fit=crop&w=400&q=80' },
-      { id: 'j2', brand: 'Joe', name: 'Asphalt Dreamer', img: 'https://images.unsplash.com/photo-1505330622279-bf7d7fc918f4?auto=format&fit=crop&w=400&q=80' },
-      { id: 'j3', brand: 'Joe', name: 'Street Truth AOP', img: 'https://images.unsplash.com/photo-1496568816309-51d7c7a8a121?auto=format&fit=crop&w=400&q=80' },
-      { id: 'j4', brand: 'Joe', name: 'Rust & Blood', img: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=400&q=80' },
-      { id: 'j5', brand: 'Joe', name: 'Industrial Soul', img: 'https://images.unsplash.com/photo-1516937941344-00b4e0337589?auto=format&fit=crop&w=400&q=80' },
-      { id: 'a1', brand: 'Alkami', name: 'Ethereal Frequency', img: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=400&q=80' },
-      { id: 'a2', brand: 'Alkami', name: 'Sacred Geometry', img: 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&w=400&q=80' },
-      { id: 'a3', brand: 'Alkami', name: 'Nebula Manifest', img: 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=400&q=80' },
-      { id: 'a4', brand: 'Alkami', name: 'Cymatic Pattern', img: 'https://images.unsplash.com/photo-1550684376-efcbd6e3f031?auto=format&fit=crop&w=400&q=80' },
-      { id: 'a5', brand: 'Alkami', name: 'Astral Flow', img: 'https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?auto=format&fit=crop&w=400&q=80' },
-      { id: 'd1', brand: 'Diva', name: 'Empress Gold', img: 'https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=400&q=80' },
-      { id: 'd2', brand: 'Diva', name: 'Midnight Sovereign', img: 'https://images.unsplash.com/photo-1550684847-75bdda21cc95?auto=format&fit=crop&w=400&q=80' },
-      { id: 'd3', brand: 'Diva', name: 'Fierce Grace', img: 'https://images.unsplash.com/photo-1557683316-973673baf926?auto=format&fit=crop&w=400&q=80' },
-      { id: 'd4', brand: 'Diva', name: 'Ornate Power', img: 'https://images.unsplash.com/photo-1557682250-33bd709cbe85?auto=format&fit=crop&w=400&q=80' },
-      { id: 'd5', brand: 'Diva', name: 'Velvet Empress', img: 'https://images.unsplash.com/photo-1557682224-5b8590cd9ec5?auto=format&fit=crop&w=400&q=80' }
-    ];
-
-    function loadVault(brandFilter = 'all') {
-      const grid = document.getElementById('vault-grid');
-      const filteredCollection = brandFilter === 'all' 
-        ? founderCollection 
-        : founderCollection.filter(item => item.brand.toLowerCase() === brandFilter.toLowerCase());
-
-      grid.innerHTML = filteredCollection.map(item => `
-        <div class="vault-card" onclick="selectVaultItem('${item.id}')">
-          <img src="${item.img}" class="vault-thumb" alt="${item.name}">
-          <div class="vault-tag">${item.brand}</div>
-          <div class="vault-name">${item.name}</div>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="galaxy galaxy-left"></div>
+        <div class="header-content">
+            <h1 class="main-title">DOC JORDAN</h1>
+            <p class="subtitle">METAPHYSICIAN &amp; VISIONARY</p>
         </div>
-      `).join('');
-    }
+        <div class="galaxy galaxy-right"></div>
+    </header>
 
-    window.selectVaultItem = (id) => {
-      const item = founderCollection.find(i => i.id === id);
-      promptInput.value = `${item.brand}: ${item.name}`;
-      generatedImg.src = item.img;
-      mockup.style.display = 'block';
-      mockup.scrollIntoView({ behavior: 'smooth' });
-    };
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <a href="#about" class="nav-btn">ABOUT</a>
+        <a href="#clothing" class="nav-btn">CLOTHING</a>
+        <a href="#books" class="nav-btn">BOOKS BY DOC</a>
+        <a href="#bookclub" class="nav-btn">528 BOOK CLUB</a>
+        <a href="#homeoffice" class="nav-btn">HOME AND OFFICE</a>
+        <a href="#supplements" class="nav-btn">TITAN SUPPLEMENTS</a>
+        <a href="#community" class="nav-btn">COMMUNITY</a>
+        <a href="#underdog" class="nav-btn">UNDERDOG PRODUCTIONS</a>
+        <a href="#contact" class="nav-btn">CONTACT INFO</a>
+    </nav>
 
-    generateBtn.addEventListener('click', async () => {
-      const prompt = promptInput.value.trim();
-      if (!prompt) {
-        promptInput.style.borderBottomColor = 'red';
-        setTimeout(() => promptInput.style.borderBottomColor = '', 1000);
-        return;
-      }
+    <!-- Main Content -->
+    <main class="content-grid">
 
-      btnText.style.display = 'none';
-      loading.style.display = 'block';
-      generateBtn.disabled = true;
-      mockup.style.display = 'none';
+        <!-- ══════════════════════════════ ABOUT ══════════════════════════════ -->
+        <section id="about" class="content-card">
+            <h2 class="section-title">ABOUT</h2>
+            <div class="section-content">
+                <p>Doc Jordan is a visionary metaphysician blending ancient wisdom with modern spirituality. His transformative teachings empower individuals to unlock their highest potential and live authentically.</p>
+                <p>He teaches us profound wake stillness of consciousness within treasured timeless theories. Explore time and awaken the quantitative deepening of our source - truly to be accepted hearted. His action has shown and been demonstrated globally among all ancestral community.</p>
+                <p>You sometimes go through past themes, dreamscape, friends, and most importantly awaken to drama - being empowered and consciously connected.</p>
+            </div>
+        </section>
 
-      try {
-        const response = await fetch(GENERATE_FUNCTION_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            prompt: prompt,
-            userId: 'user_' + Math.random().toString(36).substr(2, 9),
-            imageMode: 'text'
-          })
-        });
+        <!-- ══════════════════════════════ CLOTHING LINES ══════════════════════════════ -->
+        <section id="clothing" class="content-card">
+            <h2 class="section-title">CLOTHING LINES</h2>
 
-        if (!response.ok) throw new Error('Generation failed');
-        const data = await response.json();
-        generatedImg.src = data.design.image_url;
-        mockup.style.display = 'block';
-        mockup.scrollIntoView({ behavior: 'smooth' });
-      } catch (error) {
-        alert(`VISIONARY ERROR: ${error.message}`);
-      } finally {
-        btnText.style.display = 'block';
-        loading.style.display = 'none';
-        generateBtn.disabled = false;
-      }
-    });
+            <div class="three-col-grid">
 
-    if (checkoutBtn) {
-      checkoutBtn.addEventListener('click', () => {
-        const originalText = checkoutBtn.innerText;
-        checkoutBtn.innerText = 'REDIRECTING TO STRIPE...';
-        checkoutBtn.style.opacity = '0.7';
-        
-        setTimeout(() => {
-          alert('Stripe Checkout Session Initiated!\nSecure payment for Premium DNT Hoodie.');
-          checkoutBtn.innerText = originalText;
-          checkoutBtn.style.opacity = '1';
-        }, 1500);
-      });
-    }
+                <!-- COL 1: ALKAMI -->
+                <div class="col-panel col-alkami">
+                    <h3 class="col-brand-title alkami-title">alkami</h3>
 
-    // Toggle between Visionary and Creator Mode
-    chipVisionary.addEventListener('click', () => {
-      chipVisionary.classList.add('active');
-      chipCreator.classList.remove('active');
-      visionaryArea.style.display = 'block';
-      creatorArea.style.display = 'none';
-    });
+                    <!-- Mini collection thumbnails -->
+                    <div class="mini-collection-row">
+                        <div class="mini-col-thumb">
+                            <img src="./assets/blue_mannequin_walking_dog.jpg" alt="Alkami">
+                            <span>ALKAMI</span>
+                        </div>
+                        <div class="mini-col-thumb">
+                            <img src="./assets/skid_row_camo.jpg" alt="Skid Row Joe">
+                            <span>SKID ROW JOE</span>
+                        </div>
+                        <div class="mini-col-thumb">
+                            <img src="./assets/diva_purple_gold.png" alt="Cali Divas">
+                            <span>CALI DIVAS</span>
+                        </div>
+                    </div>
 
-    chipCreator.addEventListener('click', () => {
-      chipCreator.classList.add('active');
-      chipVisionary.classList.remove('active');
-      visionaryArea.style.display = 'none';
-      creatorArea.style.display = 'block';
-    });
+                    <!-- 3x3 Clothing Gallery -->
+                    <div class="col-gallery-grid">
+                        <div class="col-gallery-item"><img src=
+                        <div class="col-gallery-item"><img src="./assets/matching_dog_tracksuit.jpg" alt="Alkami Companion Set"></div>
+                        <div class="col-gallery-item"><img src="./assets/gold_geometry_tee.jpg" alt="Alkami Gold Geometry Tee"></div>
+                        <div class="col-gallery-item"><img src="./assets/skid_row_white_gold.jpg" alt="SRJ White Gold"></div>
+                        <div class="col-gallery-item"><img src="./assets/skid_row_varsity.jpg" alt="SRJ Varsity"></div>
+                        <div class="col-gallery-item"><img src="./assets/top_banner.jpg" alt="SRJ Banner"></div>
+                        <div class="col-gallery-item"><img src="./assets/diva_cali_crop.png" alt="Cali Divas Crop"></div>
+                        <div class="col-gallery-item"><img src="./assets/diva_purple_gold.png" alt="Cali Divas Tracksuit"></div>
+                        </div>
 
-    creatorArea.addEventListener('click', () => {
-      fileInput.click();
-    });
+                    <div class="col-shop-btns">
+                        <a href="#" class="col-shop-btn">SHOP NOW</a>
+                        <a href="#" class="col-shop-btn">SHOP NOW</a>
+                    </div>
+                </div>
 
-    fileInput.addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = (event) => {
-          promptInput.value = `Uploaded Sketch: ${file.name}`;
-          generatedImg.src = event.target.result;
-          mockup.style.display = 'block';
-          mockup.scrollIntoView({ behavior: 'smooth' });
-        };
-        reader.readAsDataURL(file);
-      }
-    });
+                <!-- COL 2: SKID ROW JOE -->
+                <div class="col-panel col-srj">
+                    <h3 class="col-brand-title srj-title">skid row joe</h3>
 
-    // Vault brand filter selection
-    document.querySelectorAll('.brand-chip').forEach(chip => {
-      chip.addEventListener('click', () => {
-        document.querySelectorAll('.brand-chip').forEach(c => c.classList.remove('active'));
-        chip.classList.add('active');
-        loadVault(chip.getAttribute('data-brand'));
-      });
-    });
+                    <!-- Feature image -->
+                    <div class="srj-feature-img">
+                        <img src="./assets/skid_row_docu.jpg" alt="Skid Row Joe Collection">
+                    </div>
 
-    loadVault();
-  </script>
+                    <!-- Product thumbnails -->
+                    <div class="srj-product-row">
+                        <div class="srj-product-thumb">
+                            <img src="./assets/skid_row_camo.jpg" alt="Camo Edition">
+                        </div>
+                        <div class="srj-product-thumb">
+                            <img src="./assets/skid_row_white_gold.jpg" alt="White Gold">
+                        </div>
+                        <div class="srj-product-thumb">
+                            <img src="./assets/skid_row_varsity.jpg" alt="Varsity">
+                        </div>
+                    </div>
+
+                    <p class="srj-order-text">ORDER ONLINE AT<br><a href="https://www.energyfaddiction.com" target="_blank" class="srj-link">WWW.ENERGYFADDICTION.COM</a></p>
+
+                    <div class="col-shop-btns">
+                        <a href="#" class="col-shop-btn">SHOP NOW</a>
+                    </div>
+                </div>
+
+                <!-- COL 3: CALI DIVA'S CLUB -->
+                <div class="col-panel col-cali">
+                    <h3 class="col-brand-title cali-title">CALI DIVA'S<br>CLUB</h3>
+
+                    <!-- Feature image -->
+                    <div class="cali-feature-img">
+                        <img src="./assets/diva_purple_gold.png" alt="Cali Divas">
+                    </div>
+
+                    <div class="section-content" style="font-size:13px; margin-top:12px;">
+                        <p>Awaken your consciousness and expand your frequency with Doc Jordan. The 528 Book Club focuses on high-vibrational knowledge, spiritual elevation, and scientific truths that empower you to change your vibe and change your life.</p>
+                    </div>
+
+                    <p class="cali-join-link"><a href="#bookclub" class="col-shop-btn cali-btn">JOIN THE ALKAMI INSTITUTE</a></p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════ BOOKS BY DOC ══════════════════════════════ -->
+        <section id="books" class="content-card">
+            <h2 class="section-title">BOOKS BY DOC</h2>
+            <div style="text-align: center; margin-bottom: 25px;">
+                <img src="./assets/bookshelf_collage.jpg" alt="Doc Jordan Books Shelf Collage" style="max-height: 350px; width: auto; margin: 0 auto; display: block; border-radius: 10px; border: 2px solid var(--neon-cyan); box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);">
+            </div>
+            <div class="books-grid">
+                <div class="book-item">
+                    <img src="./assets/challenge_vibe.png" alt="The Energy of Addiction" style="width: 100%; aspect-ratio: 2/3; object-fit: cover; border-radius: 8px; border: 2px solid var(--neon-pink);">
+                    <p class="book-title">The Energy of Addiction</p>
+                </div>
+                <div class="book-item">
+                    <div class="placeholder-img-small" style="background: linear-gradient(135deg, #0a0a1f, #00ffff); color: #FFF; font-size: 11px;">Diagnosing Emotions</div>
+                    <p class="book-title">Diagnosing Emotions</p>
+                </div>
+                <div class="book-item">
+                    <div class="placeholder-img-small" style="background: linear-gradient(135deg, #0a0a1f, #b800ff); color: #FFF; font-size: 11px;">Change Your Vibe</div>
+                    <p class="book-title">Change Your Vibe Change Your Life</p>
+                </div>
+                <div class="book-item">
+                    <div class="placeholder-img-small" style="background: linear-gradient(135deg, #0a0a1f, #00d9ff); color: #FFF; font-size: 11px;">Addiction &amp; Recovery</div>
+                    <p class="book-title">Word Search Book</p>
+                </div>
+            </div>
+            <p class="order-info">ORDER ONLINE AT<br><strong>WWW.ENERGYFADDICTION.COM</strong></p>
+        </section>
+
+        <!-- ══════════════════════════════ 528 BOOK CLUB ══════════════════════════════ -->
+        <section id="bookclub" class="content-card">
+            <h2 class="section-title">528 BOOK CLUB</h2>
+            <div style="text-align: center; margin-bottom: 20px;">
+                <img src="./assets/bookshelf_collage.jpg" alt="528 Book Club" style="max-height: 250px; width: auto; margin: 0 auto; display: block; border-radius: 10px; border: 2px solid var(--neon-cyan); box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);">
+            </div>
+            <div class="section-content">
+                <p>Awaken your consciousness and expand your frequency with literature handpicked by Doc Jordan. The 528 Book Club focuses on high-vibrational knowledge, spiritual elevation, and scientific truths that empower you to change your vibe and change your life.</p>
+                <p style="text-align: center; font-weight: bold; margin-top: 15px; color: var(--neon-pink);">JOIN THE LITERARY MOVEMENT</p>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════ HOME AND OFFICE ══════════════════════════════ -->
+        <section id="homeoffice" class="content-card">
+            <h2 class="section-title">HOME AND OFFICE</h2>
+            <div style="text-align: center; margin-bottom: 20px;">
+                <img src="./assets/bed_sheets.jpg" alt="Alkami Home & Office Luxury Bedding" style="max-height: 250px; width: auto; margin: 0 auto; display: block; border-radius: 10px; border: 2px solid var(--neon-cyan); box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);">
+            </div>
+            <div class="section-content">
+                <p>Encircle your living and work spaces in high-vibrational energy. Our Home and Office collection features custom bedding, sacred geometry art, and lifestyle essentials that align your environment with supreme reality.</p>
+                <p style="text-align: center; font-weight: bold; margin-top: 15px; color: var(--neon-cyan);">ELEVATE YOUR SPACE</p>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════ TITAN SUPPLEMENTS ══════════════════════════════ -->
+        <section id="supplements" class="content-card">
+            <h2 class="section-title">TITAN SUPPLEMENTS</h2>
+            <div style="text-align: center; margin-bottom: 20px;">
+                <img src="./assets/titan_holistic_health.jpg" alt="Titan Holistic Health Supplements" style="max-height: 200px; width: auto; margin: 0 auto; display: block; border-radius: 10px; border: 2px solid var(--neon-cyan); box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);">
+            </div>
+            <div class="section-content">
+                <p>Optimize your biological vessel. Titan Holistic Health offers premium Sea Moss, Hair Vitamin Gummies, and Sleep Well Gummies crafted to nurture physical health, support cognitive clarity, and synchronize body frequencies.</p>
+                <p style="text-align: center; font-weight: bold; margin-top: 15px; color: var(--neon-pink);">OPTIMIZE YOUR HEALTH</p>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════ COMMUNITY ══════════════════════════════ -->
+        <section id="community" class="content-card">
+            <h2 class="section-title">COMMUNITY INVOLVEMENT</h2>
+            <div class="community-grid">
+                <div class="community-img"><img 
+                <div class="community-img"><img 
+                <div class="community-img"><img 
+                <div class="community-img"><img src="./assets/titan_supplements.jpg" alt="Community Event 4" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:8px;border:1px solid var(--neon-cyan);"></div>
+                <div class="community-img"><img 
+                <div class="community-img"><img src="./assets/matching_dog_tracksuit.jpg" alt="Community Event 6" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:8px;border:1px solid var(--neon-cyan);"></div>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════ UNDERDOG PRODUCTIONS ══════════════════════════════ -->
+        <section id="underdog" class="content-card">
+            <h2 class="section-title">UNDERDOG PRODUCTIONS</h2>
+
+            <!-- Skid Row Documentary Video -->
+            <div style="margin-bottom: 40px; text-align: center;">
+                <h3 style="font-family: var(--font-title); font-size: 20px; color: var(--neon-pink); margin-bottom: 15px;">SKID ROW CITY OF FALLEN ANGELS</h3>
+                <div style="max-width: 800px; margin: 0 auto; border-radius: 12px; overflow: hidden; border: 2px solid var(--neon-purple); box-shadow: 0 0 20px rgba(184, 0, 255, 0.4);">
+                    <video controls poster="./assets/skid_row_docu.jpg" style="width: 100%; aspect-ratio: 16/9; display: block; object-fit: cover;">
+                        <source src="./assets/skidrowjoe_doc.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <p style="margin-top: 15px; max-width: 600px; margin-left: auto; margin-right: auto; opacity: 0.8;">A Doc Jordan Mini Documentary highlighting our supreme reality, homeless, recidivism, mental health and addiction recovery studies.</p>
+                <a href="https://landingdocjordan.netlify.app/" target="_blank" class="action-btn" style="text-decoration: none; text-align: center; display: inline-block; line-height: 2.2; margin-top: 15px; padding: 0 30px;">Book Now</a>
+            </div>
+
+            <!-- ── MEDIA: 3-column ── -->
+            <h2 class="section-title" style="margin-bottom: 20px;">MEDIA</h2>
+            <div class="three-col-grid media-three-col">
+
+                <!-- MUSIC BY DOC -->
+                <div class="col-panel media-panel">
+                    <h3 class="col-brand-title media-col-title">MUSIC BY DOC</h3>
+                    <div class="media-feature-img">
+                        <img src="./assets/bed_sheets.jpg" alt="Music by Doc">
+                    </div>
+                    <div class="section-content" style="font-size:13px; margin-top:10px;">
+                        <p>Encircle your living and high-vibrational energy. Doc Jordan's music offers a transformative experience—sacred geometry art and lifestyle frequencies that align you with supreme reality.</p>
+                    </div>
+                    <!-- Track list -->
+                    <div class="audio-player-container" style="margin: 12px 0;">
+                        <div class="player-now-playing">
+                            <p class="now-playing-label">NOW STREAMING</p>
+                            <p class="player-track-title">Select a track to play</p>
+                        </div>
+                        <div class="player-controls">
+                            <button class="player-control-btn play-pause-btn" id="global-play-btn">▶</button>
+                            <div class="player-progress-container">
+                                <span class="time-display current-time">0:00</span>
+                                <div class="player-progress-bar">
+                                    <div class="player-progress-fill" id="player-progress-fill"></div>
+                                </div>
+                                <span class="time-display duration-time">0:00</span>
+                            </div>
+                        </div>
+                        <audio id="global-audio-element" style="display: none;"></audio>
+                    </div>
+                    <div class="music-list">
+                        <div class="music-item" data-src="./assets/audio/The Real Doc.mp3" data-title="The Real Doc">
+                            <div class="item-play-btn">▶</div>
+                            <div class="music-info">
+                                <p class="track-title">The Real Doc</p>
+                                <p class="track-subtitle">Vocal track &amp; high frequencies</p>
+                            </div>
+                            <div class="track-actions">
+                                <button class="listen-btn preview-btn">Stream</button>
+                                <a href="https://www.paypal.com/ncp/payment/QY3LLQSPMTXZG" target="_blank" class="download-buy-btn">$1.99</a>
+                            </div>
+                        </div>
+                        <div class="music-item" data-src="./assets/audio/After Henny.mp3" data-title="After Henny">
+                            <div class="item-play-btn">▶</div>
+                            <div class="music-info">
+                                <p class="track-title">After Henny</p>
+                                <p class="track-subtitle">Chill high-vibration flow</p>
+                            </div>
+                            <div class="track-actions">
+                                <button class="listen-btn preview-btn">Stream</button>
+                                <a href="https://www.paypal.com/ncp/payment/QY3LLQSPMTXZG" target="_blank" class="download-buy-btn">$1.99</a>
+                            </div>
+                        </div>
+                        <div class="music-item" data-src="./assets/audio/I'll Give My All for You ext v2.2.2.2.mp3" data-title="I'll Give My All for You">
+                            <div class="item-play-btn">▶</div>
+                            <div class="music-info">
+                                <p class="track-title">I'll Give My All for You</p>
+                                <p class="track-subtitle">Extended Version 2.2.2.2</p>
+                            </div>
+                            <div class="track-actions">
+                                <button class="listen-btn preview-btn">Stream</button>
+                                <a href="https://www.paypal.com/ncp/payment/QY3LLQSPMTXZG" target="_blank" class="download-buy-btn">$1.99</a>
+                            </div>
+                        </div>
+                        <div class="music-item" data-src="./assets/audio/Somethin for nuthin.mp3" data-title="Somethin for nuthin">
+                            <div class="item-play-btn">▶</div>
+                            <div class="music-info">
+                                <p class="track-title">Somethin for nuthin</p>
+                                <p class="track-subtitle">Soulful ambient rhythms</p>
+                            </div>
+                            <div class="track-actions">
+                                <button class="listen-btn preview-btn">Stream</button>
+                                <a href="https://www.paypal.com/ncp/payment/QY3LLQSPMTXZG" target="_blank" class="download-buy-btn">$1.99</a>
+                            </div>
+                        </div>
+                        <div class="music-item" data-src="./assets/audio/the last transmission.mp3" data-title="The Last Transmission">
+                            <div class="item-play-btn">▶</div>
+                            <div class="music-info">
+                                <p class="track-title">The Last Transmission</p>
+                                <p class="track-subtitle">Deep space frequencies</p>
+                            </div>
+                            <div class="track-actions">
+                                <button class="listen-btn preview-btn">Stream</button>
+                                <a href="https://www.paypal.com/ncp/payment/QY3LLQSPMTXZG" target="_blank" class="download-buy-btn">$1.99</a>
+                            </div>
+                        </div>
+                        <div class="music-item" data-src="./assets/audio/the truth.MP3" data-title="The Truth">
+                            <div class="item-play-btn">▶</div>
+                            <div class="music-info">
+                                <p class="track-title">The Truth</p>
+                                <p class="track-subtitle">Original master track</p>
+                            </div>
+                            <div class="track-actions">
+                                <button class="listen-btn preview-btn">Stream</button>
+                                <a href="https://www.paypal.com/ncp/payment/QY3LLQSPMTXZG" target="_blank" class="download-buy-btn">$1.99</a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="https://www.paypal.com/ncp/payment/QY3LLQSPMTXZG" target="_blank" class="col-shop-btn" style="display:block; text-align:center; margin-top:14px; text-decoration:none;">MUSIC FROM DOC</a>
+                </div>
+
+                <!-- HOTMIXING WITH DOC -->
+                <div class="col-panel media-panel">
+                    <h3 class="col-brand-title media-col-title">HOTMIXING WITH DOC</h3>
+                    <div class="media-feature-img">
+                        <img src="./assets/titan_supplements.jpg" alt="Hotmixing with Doc">
+                    </div>
+                    <div class="section-content" style="font-size:13px; margin-top:10px;">
+                        <p>Optimize your biological vessel. Doc's Hotmixes offers premium Sea Moss, Hot Vibration Grooves, and Sleep Well frequencies crafted to nurture physical health, support cognitive clarity, and synchronize body frequencies.</p>
+                    </div>
+                    <div class="music-list" style="margin-top:10px;">
+                        <div class="music-item" data-src="./assets/audio/knight rider 2026.mp3" data-title="Knight Rider 2026 Mix">
+                            <div class="item-play-btn">▶</div>
+                            <div class="music-info">
+                                <p class="track-title">Knight Rider 2026</p>
+                                <p class="track-subtitle">Futuristic high-energy synth</p>
+                            </div>
+                            <div class="track-actions">
+                                <button class="listen-btn preview-btn">Stream</button>
+                                <a href="https://www.paypal.com/ncp/payment/QY3LLQSPMTXZG" target="_blank" class="download-buy-btn">$1.99</a>
+                            </div>
+                        </div>
+                        <div class="music-item" data-src="./assets/audio/conjunction junction.mp3" data-title="Conjunction Junction Mix">
+                            <div class="item-play-btn">▶</div>
+                            <div class="music-info">
+                                <p class="track-title">Conjunction Junction</p>
+                                <p class="track-subtitle">High-tempo cosmic mix</p>
+                            </div>
+                            <div class="track-actions">
+                                <button class="listen-btn preview-btn">Stream</button>
+                                <a href="https://www.paypal.com/ncp/payment/QY3LLQSPMTXZG" target="_blank" class="download-buy-btn">$1.99</a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="col-shop-btn" style="display:block; text-align:center; margin-top:14px; text-decoration:none;">STREAM YOUR MIX</a>
+                </div>
+
+                <!-- PODCAST -->
+                <div class="col-panel media-panel">
+                    <h3 class="col-brand-title media-col-title">PODCAST</h3>
+                    <!-- 2x2 podcast image grid -->
+                    <div class="podcast-img-grid">
+                        <div class="podcast-img-thumb"><img src="./assets/skid_row_docu.jpg" alt="Podcast Episode 1"></div>
+                        <div class="podcast-img-thumb"><img src="./assets/challenge_vibe.png" alt="Podcast Episode 2"></div>
+                        <div class="podcast-img-thumb"><img src="./assets/blue_mannequin_walking_dog.jpg" alt="Podcast Episode 3"></div>
+                        <div class="podcast-img-thumb"><img src="./assets/diva_purple_gold.png" alt="Podcast Episode 4"></div>
+                    </div>
+                    <div class="podcast-list" style="margin-top:10px;">
+                        <div class="podcast-episode">
+                            <div class="play-icon">▶</div>
+                            <div class="episode-info">
+                                <p class="episode-number">Episode 1</p>
+                                <p class="episode-title">The Levi/Learn Episode</p>
+                                <p class="episode-desc">The hardest white some insights seen on oracle disciplines of witnessing our supreme reality...</p>
+                            </div>
+                            <button class="play-btn">▶ Play</button>
+                        </div>
+                        <div class="podcast-episode">
+                            <div class="play-icon">▶</div>
+                            <div class="episode-info">
+                                <p class="episode-number">Episode 2</p>
+                                <p class="episode-title">The Mo'Thanasky Episode</p>
+                                <p class="episode-desc">This tells the story of Episode on young life and probability far forward...</p>
+                            </div>
+                            <button class="play-btn">▶ Play</button>
+                        </div>
+                    </div>
+                    <a href="https://landingdocjordan.netlify.app/" target="_blank" class="col-shop-btn" style="display:block; text-align:center; margin-top:14px; text-decoration:none;">BOOK ME ON PODCAST</a>
+                </div>
+
+            </div><!-- end media three-col -->
+        </section>
+
+        <!-- ══════════════════════════════ SPEAKING ENGAGEMENTS ══════════════════════════════ -->
+        <section id="speaking" class="content-card">
+            <h2 class="section-title">UPCOMING SPEAKING ENGAGEMENTS</h2>
+            <div class="events-list">
+                <div class="event-item">
+                    <div class="event-date">
+                        <p class="date-month">September 30</p>
+                        <p class="date-time">2:30 pm</p>
+                    </div>
+                    <div class="event-details">
+                        <p class="event-title">Doc Jordan Industry Cleaners</p>
+                        <p class="event-location">Portland, Ashland, OR</p>
+                    </div>
+                    <a href="https://landingdocjordan.netlify.app/" target="_blank" class="rsvp-btn" style="text-decoration: none; text-align: center; display: block; line-height: 2.2;">RSVP</a>
+                </div>
+                <div class="event-item">
+                    <div class="event-date">
+                        <p class="date-month">September 22</p>
+                        <p class="date-time">7:00 pm</p>
+                    </div>
+                    <div class="event-details">
+                        <p class="event-title">Doc Jordan Endless Cleaners</p>
+                        <p class="event-location">Oakland, Ashland, PA</p>
+                    </div>
+                    <a href="https://landingdocjordan.netlify.app/" target="_blank" class="rsvp-btn" style="text-decoration: none; text-align: center; display: block; line-height: 2.2;">RSVP</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════ CONTACT ══════════════════════════════ -->
+        <section id="contact" class="content-card">
+            <h2 class="section-title">CONTACT &amp; SCHEDULING INFO.</h2>
+            <div class="contact-content">
+                <form class="contact-form">
+                    <input type="email" placeholder="E-mails" class="form-input">
+                    <input type="text" placeholder="Your Name" class="form-input">
+                    <input type="text" placeholder="Subject" class="form-input">
+                    <textarea placeholder="Message" class="form-textarea" rows="5"></textarea>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+                <div class="contact-info">
+                    <div class="calendar">
+                        <div class="calendar-header">
+                            <span>◀</span>
+                            <span>November 05/31</span>
+                            <span>▶</span>
+                        </div>
+                        <div class="calendar-grid">
+                            <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+                            <span></span><span></span><span></span><span></span><span></span><span>01</span><span>02</span>
+                            <span>03</span><span>04</span><span>05</span><span>06</span><span>07</span><span>08</span><span>09</span>
+                            <span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span>
+                            <span>17</span><span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span>
+                            <span>24</span><span>25</span><span>26</span><span>27</span><span>28</span><span>29</span><span>30</span>
+                        </div>
+                    </div>
+                    <div class="contact-details">
+                        <p>📞 (XXX) 352-6580</p>
+                        <p>📞 (XXX) 5858-5885</p>
+                        <p>✉️ energyfaddiction.com</p>
+                        <p>🌐 www.energyfadd.com</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <p>© 2024 DOC JORDAN. ALL RIGHTS RESERVED.</p>
+        <div class="social-links">
+            <a href="#" class="social-icon facebook" aria-label="Facebook">f</a>
+            <a href="#" class="social-icon instagram" aria-label="Instagram">📷</a>
+            <a href="#" class="social-icon twitter" aria-label="Twitter">🐦</a>
+            <a href="#" class="social-icon tiktok" aria-label="TikTok">♪</a>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
