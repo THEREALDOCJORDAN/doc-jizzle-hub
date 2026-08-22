@@ -261,14 +261,14 @@ const seedProducts = [
     bestseller: false,
   },
   {
-    slug: "the-sober-living-blueprint",
-    name: "The Sober Living Blueprint",
-    subtitle: "Doc Jordan's definitive guide to building a life of clarity, freedom, and sustainable sobriety.",
+    slug: "how-to-start-and-operate-a-sober-living-home",
+    name: "How to Start and Operate a Sober Living or Transitional Home",
+    subtitle: "A practical guide to compliant recovery housing, property setup, resident operations, and sustainable growth.",
     category: "Books",
     collection: "Recovery & Renewal",
-    format: "Hardcover + digital companion",
+    format: "Paperback + digital companion",
     description:
-      "More than a recovery book — this is a full life redesign. Doc Jordan draws on decades of recovery-informed work, spiritual insight, and practical coaching to help readers build a sober life they actually want to live. From identity shifts and daily rituals, to rebuilding relationships and reigniting purpose, The Sober Living Blueprint is the map for the life waiting on the other side.",
+      "Doc Jordan draws on firsthand recovery-housing experience and operator wisdom to walk you through every stage of launching an ethical, well-managed sober living or transitional home. Updated for 2026 — including HUD CoC funding shifts and national compliance frameworks — this is the playbook for small operators, nonprofit founders, faith-based groups, and mission-driven entrepreneurs who want to do this right. From finding the right property and navigating zoning, to building house culture, managing residents, and scaling responsibly, this book covers it all.",
     priceCents: 3200,
     compareAtCents: 3800,
     inventory: 150,
@@ -280,14 +280,16 @@ const seedProducts = [
       "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=1200&q=85",
       ...bookImages.slice(2, 4),
     ],
-    tags: ["sobriety", "recovery", "blueprint", "bestseller", "book"],
+    tags: ["sober living", "recovery housing", "transitional housing", "operations", "book"],
     highlights: [
-      "40+ actionable recovery rituals",
-      "Identity & purpose rebuilding framework",
-      "Shame-free, compassion-first approach",
-      "Includes downloadable 90-day blueprint workbook",
+      "Updated for 2026 HUD CoC policy and funding landscape",
+      "14-chapter compliance-first operations framework",
+      "Property strategy, lease negotiation, and due diligence checklists",
+      "Resident agreements, house rules, incident forms & KPI dashboard",
+      "Ethics chapter: no exploitation, no hidden fees, resident dignity first",
+      "Scaling and funding pathways for growth-ready operators",
     ],
-    variants: ["Hardcover", "Paperback", "Signed Hardcover", "Digital"],
+    variants: ["Paperback", "Signed Copy", "Digital", "Facilitator Bundle"],
     featured: true,
     bestseller: true,
   },
@@ -536,4 +538,5 @@ export const sortOptions: Array<{ label: string; value: SortOption }> = [
   { label: "Highest vibration", value: "rating" },
   { label: "Newest arrivals", value: "newest" },
 ];
+
 
