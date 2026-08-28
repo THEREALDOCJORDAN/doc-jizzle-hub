@@ -1,4 +1,12 @@
-import { boolean, integer, jsonb, pgTable, serial, text, timestamp, varchar } from "drizzle-orm/pg-core";
+import { boolean, integer, jsonb, pgEnum, pgTable, serial, text, timestamp, varchar } from "drizzle-orm/pg-core";
+
+export const categoryTypeEnum = pgEnum("category_type", [
+  "metaphysical",
+  "humor",
+  "political",
+  "lifestyle",
+  "bridge",
+]);
 
 export const products = pgTable("products", {
   id: serial("id").primaryKey(),
@@ -6,6 +14,7 @@ export const products = pgTable("products", {
   name: varchar("name", { length: 220 }).notNull(),
   subtitle: varchar("subtitle", { length: 260 }).notNull(),
   category: varchar("category", { length: 60 }).notNull(),
+  categoryType: categoryTypeEnum("category_type").notNull().default("lifestyle"),
   collection: varchar("collection", { length: 120 }).notNull(),
   format: varchar("format", { length: 120 }).notNull(),
   description: text("description").notNull(),
