@@ -22,6 +22,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
         </div>
         <Header />
         {children}
+        <BookDocSection />
         <Footer />
       </div>
     </CartProvider>
@@ -82,6 +83,36 @@ function Header() {
         ))}
       </div>
     </header>
+  );
+}
+
+function BookDocSection() {
+  return (
+    <section className="relative overflow-hidden bg-gradient-to-br from-[#08111f] via-[#0f2f78] to-[#08111f] px-4 py-20 text-white luxury-noise sm:px-6 lg:px-8">
+      <div className="absolute -left-20 top-0 h-64 w-64 rounded-full bg-[#d6b25e]/20 blur-3xl" />
+      <div className="absolute -right-20 bottom-0 h-64 w-64 rounded-full bg-[#0f2f78]/50 blur-3xl" />
+      <div className="relative mx-auto max-w-5xl text-center">
+        <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#f7dc8a]">
+          Speaking &amp; Guest Appearances
+        </p>
+        <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-5xl md:text-6xl">
+          Book DOC for your podcast or in person
+        </h2>
+        <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-white/75 sm:text-lg">
+          Bring high-vibration insights, recovery-informed wisdom, and transformative energy to your audience or live event.
+        </p>
+        <div className="mt-8 flex justify-center">
+          <Link
+            href="https://landingdocjordan.netlify.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-full bg-[#d6b25e] px-8 py-4 text-sm font-black uppercase tracking-[0.18em] text-[#08111f] shadow-2xl shadow-[#d6b25e]/30 transition hover:-translate-y-1 hover:bg-[#f7dc8a]"
+          >
+            book DOC NOW
+          </Link>
+        </div>
+      </div>
+    </section>
   );
 }
 
