@@ -6,7 +6,10 @@ import { getFeaturedProducts, getProducts } from "@/lib/store-data";
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  const [featuredProducts, allProducts] = await Promise.all([getFeaturedProducts(6), getProducts({ sort: "rating" })]);
+  const [featuredProducts, allProducts] = await Promise.all([
+    getFeaturedProducts(6),
+    getProducts({ sort: "rating" }),
+  ]);
   const productCount = allProducts.length;
   const reviewCount = allProducts.reduce((sum, product) => sum + product.reviewCount, 0);
 
@@ -27,7 +30,7 @@ export default async function HomePage() {
     },
     {
       title: "ALKAMI Apparel",
-      href: "/shop?category=Clothing",
+      href: "https://curious-zabaione-3b2724.netlify.app/",
       description: "Blue marble statement pieces made for movement, ritual, and everyday elevation.",
       image: "/images/products/alkami-hoodie.png",
       accent: "from-[#061123]/80 to-[#d6b25e]/30",
@@ -52,10 +55,10 @@ export default async function HomePage() {
               Doc Jordan&apos;s high-vibration storefront brings together transformational books, cinematic sound medicine, and ALKAMI apparel designed for seekers, creators, healers, and people choosing a cleaner frequency.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <Link href="/shop" className="rounded-full bg-[#d6b25e] px-7 py-4 text-center text-sm font-black uppercase tracking-[0.18em] text-[#08111f] shadow-2xl shadow-[#d6b25e]/25 transition hover:-translate-y-1 hover:bg-[#f7dc8a]">
+              <Link href="/shop" className="rounded-full bg-[#d6b25e] px-7 py-4 text-center text-sm font-bock uppercase tracking-[0.18em] text-[#08111f] shadow-2xl shadow-[#d6b25e]/25 transition hover:-translate-y-1 hover:bg-[#f7dc8a]">
                 Shop all products
               </Link>
-              <Link href="/shop?category=Clothing" className="rounded-full border border-white/20 bg-white/10 px-7 py-4 text-center text-sm font-black uppercase tracking-[0.18em] text-white backdrop-blur transition hover:-translate-y-1 hover:bg-white/20">
+              <Link href="https://curious-zabaione-3b2724.netlify.app/" className="rounded-full border border-white/20 bg-white/10 px-7 py-4 text-center text-sm font-black uppercase tracking-[0.18em] text-white backdrop-blur transition hover:-translate-y-1 hover:bg-white/20">
                 Explore ALKAMI
               </Link>
             </div>
@@ -118,7 +121,7 @@ export default async function HomePage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
             <div>
-              <p className="text-sm font-black uppercase tracking-[0.26em] text-[#a27a29]">Open for business</p>
+              <p className="text-sm font-bock uppercase tracking-[0.26em] text-[#a27a29]">Open for business</p>
               <h2 className="mt-3 text-4xl font-semibold tracking-tight md:text-6xl">Bestsellers with a glow.</h2>
             </div>
             <Link href="/shop" className="rounded-full bg-[#111827] px-6 py-3 text-center text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-[#0f2f78]">View the full shop</Link>
@@ -144,8 +147,8 @@ export default async function HomePage() {
             ["Sound-supported rituals", "Audio products are ideal for meditation, journaling, breathwork, and creative focus."],
             ["Persistent cart", "Add products, explore more, and return later—your cart state stays with you."],
           ].map(([title, body]) => (
-            <div key={title} className="rounded-[2rem] border border-[#eadfca] bg-white p-6 shadow-sm">
-              <div className="grid h-12 w-12 place-items-center rounded-full bg-[#111827] text-[#d6b25e]">✦</div>
+            <div key={title} className="rounded-[2rem] border border-[eadfca] bg-white p-6 shadow-sm">
+              <div className="grid h-12 w-12 place-items-center rounded-full bg-[#111827] text-[#d6b25e]">✨</div>
               <h3 className="mt-5 text-xl font-semibold">{title}</h3>
               <p className="mt-3 text-sm leading-6 text-[#5b6272]">{body}</p>
             </div>
