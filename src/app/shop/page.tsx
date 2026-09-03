@@ -45,13 +45,22 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
             </p>
           </div>
           <div className="mt-10 flex flex-wrap gap-3">
-            {["All", "Books", "Music", "Clothing"].map((item) => (
+            {[
+              { label: "All", href: "/shop" },
+              { label: "Books", href: "/shop?category=Books" },
+              { label: "Music", href: "/shop?category=Music" },
+              { label: "Clothing", href: "https://curious-zabaione-3b2724.netlify.app/" },
+            ].map((item) => (
               <Link
-                key={item}
-                href={item === "All" ? "/shop" : `/shop?category=${item}`}
-                className={`rounded-full border px-5 py-3 text-sm font-bold transition ${category === item || (!category && item === "All") ? "border-[#d6b25e] bg-[#d6b25e] text-[#08111f]" : "border-white/15 bg-white/10 text-white hover:bg-white/20"}`}
+                key={item.label}
+                href={item.href}
+                className={`rounded-full border px-5 py-3 text-sm font-bold transition ${
+                  category === item.label || (!category && item.label === "All")
+                    ? "border-[#d6b25e] bg-[#d6b25e] text-[#08111f]"
+                    : "border-white/15 bg-white/10 text-white hover:bg-white/20"
+                }`}
               >
-                {item}
+                {item.label}
               </Link>
             ))}
           </div>
@@ -66,20 +75,13 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
             <p className="text-sm font-bold uppercase tracking-[0.22em] text-[#a27a29]">{products.length} products</p>
             <h2 className="mt-2 text-3xl font-semibold md:text-5xl">{category ?? "All high-vibe goods"}</h2>
           </div>
-          <p className="max-w-md text-sm leading-6 text-[#5b6272]">
-            Every demo product includes live pricing, gallery images, variant options, and customer reviews.
-          </p>
-        </div>
+          <p className="max-w-md text-sm leading-6 textVÈÍXŒÌ—H‚ˆ]™\H[[È›ÙXİ[˜ÛY\È]™HšXÚ[™ËØ[\H[XYÙ\Ë˜\šX[Ü[ÛœË[™İ\İÛY\ˆ™]šY]ÜË‚ˆÜ‚ˆÙ]‚‚ˆÜ›ÙXİË›[™İÈ
+ˆ]ˆÛ\ÜÓ˜[YOH›]LLÜšYØ\MˆÛN™ÜšYXÛÛËLˆÎ™ÜšYXÛÛËLÈ™ÜšYXÛÛËM‚ˆÜ›ÙXİË›X\
 
-        {products.length ? (
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {products.map((product, index) => <ProductCard key={product.id} product={product} priority={index < 4} />)}
-          </div>
-        ) : (
-          <div className="mt-10 rounded-[2rem] border border-[#eadfca] bg-white p-10 text-center shadow-sm">
-            <h3 className="text-2xl font-semibold">No products matched that frequency.</h3>
-            <p className="mt-3 text-[#5b6272]">Try clearing filters or searching for books, music, hoodie, ALKAMI, or recovery.</p>
-            <Link href="/shop" className="mt-6 inline-flex rounded-full bg-[#111827] px-6 py-3 text-sm font-bold text-white">Reset filters</Link>
+›ÙXİ[™^
+HOˆ›ÙXİØ\™Ù^O^Ü›ÙXİšYH›ÙXİ^Ü›ÙXİHš[Üš]O^Ú[™^HÏŠ_BˆÙ]‚ˆ
+Hˆ
+ˆ]ˆÛ\ÜÓ˜[YOH›]LL›İ[™YVÌœ™[WH›Ü™\ˆ›Ü™\‹VÈÙXY˜ØWH™Ë]Ú]HLL^XÙ[\ˆÚYİË\ÛH‚ˆÈÛ\ÜÓ˜[YOH^L›Û\Ù[ZX›Û“›È›ÙXİÈX]ÚY]œ™\]Y[˜ŞKÚÏ‚ˆÛ\ÜÓ˜[YOH›]LÈ^VÈÍXŒÌ—H•HÛX\š[™Èš[\œÈÜˆÙX\˜Ú[™È›Üˆ›ÛÚÜË]\ÚXËÛÙYKSĞSRKÜˆ™XÛİ™\KÜ‚ˆ[šÈ™YH‹ÜÚÜˆÛ\ÜÓ˜[YOH›]Mˆ[›[™KY›^›İ[™YY[™ËVÈÌLLN×HMˆKLÈ^\ÛH›ÛX›Û^]Ú]H’eset filters</Link>
           </div>
         )}
       </section>
