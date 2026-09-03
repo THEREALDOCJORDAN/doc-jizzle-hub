@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
-
 import { CartButton, CartProvider } from "@/components/cart-provider";
 
 const navItems = [
@@ -11,7 +10,7 @@ const navItems = [
   { href: "/shop", label: "Shop" },
   { href: "/shop?category=Books", label: "Books" },
   { href: "/shop?category=Music", label: "Music" },
-  { href: "/shop?category=Clothing", label: "Clothing" },
+  { href: "https://curious-zabaione-3b2724.netlify.app/", label: "Clothing" },
 ];
 
 export function SiteShell({ children }: { children: ReactNode }) {
@@ -46,10 +45,10 @@ function Header() {
 
         <div className="hidden items-center gap-1 rounded-full border border-white/10 bg-white/5 p-1 lg:flex">
           {navItems.map((item) => {
-            const isActive = item.href === "/" ? pathname === "/" : pathname.startsWith("/shop") && item.href.includes("shop");
+            const isActive = item.href === "/" ? pathname === "/" : item.href.startsWith("/shop") && pathname.startsWith("/shop");
             return (
               <Link
-                key={item.href}
+                key={item.label}
                 href={item.href}
                 className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
                   isActive ? "bg-white text-[#08111f]" : "text-white/78 hover:bg-white/10 hover:text-white"
@@ -74,9 +73,9 @@ function Header() {
       <div className="flex gap-2 overflow-x-auto px-4 pb-4 lg:hidden">
         {navItems.map((item) => (
           <Link
-            key={item.href}
+            key={item.label}
             href={item.href}
-            className="shrink-0 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold text-white/80"
+            conssName="shrink-0 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold text-white/80"
           >
             {item.label}
           </Link>
@@ -104,7 +103,7 @@ function Footer() {
           <ul className="mt-4 space-y-3 text-sm text-white/70">
             <li><Link href="/shop?category=Books" className="hover:text-white">Inner Work Library</Link></li>
             <li><Link href="/shop?category=Music" className="hover:text-white">Sound Medicine</Link></li>
-            <li><Link href="/shop?category=Clothing" className="hover:text-white">ALKAMI Apparel</Link></li>
+            <li><Link href="https://curious-zabaione-3b2724.netlify.app/" className="hover:text-white">ALKAMI Apparel</Link></li>
           </ul>
         </div>
         <div>
