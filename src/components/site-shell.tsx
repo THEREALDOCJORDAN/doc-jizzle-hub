@@ -76,7 +76,7 @@ function Header() {
           <Link
             key={item.label}
             href={item.href}
-            conssName="shrink-0 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold text-white/80"
+            className="shrink-0 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold text-white/80"
           >
             {item.label}
           </Link>

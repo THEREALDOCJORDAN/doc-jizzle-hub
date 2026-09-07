@@ -13,3 +13,7 @@ out/
 # Misc
 .DS_Store
 *.log
+.neon
+
+# Local Netlify folder
+.netlify
