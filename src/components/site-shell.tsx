@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -10,7 +10,7 @@ const navItems = [
   { href: "/shop", label: "Shop" },
   { href: "/shop?category=Books", label: "Books" },
   { href: "/shop?category=Music", label: "Music" },
-  { href: "https://curious-zabaione-3b2724.netlify.app/", label: "Clothing" },
+  { href: "/clothing", label: "Clothing" },
 ];
 
 export function SiteShell({ children }: { children: ReactNode }) {
@@ -18,7 +18,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
     <CartProvider>
       <div className="min-h-screen overflow-x-hidden bg-[#fffaf0] text-[#111827]">
         <div className="bg-[#08111f] px-4 py-2 text-center text-xs font-semibold uppercase tracking-[0.22em] text-[#f6df9d]">
-          Free shipping over $125 · New ALKAMI blue marble drop is live
+          Free shipping over $125 Â· New ALKAMI blue marble drop is live
         </div>
         <Header />
         {children}
@@ -134,7 +134,7 @@ function Footer() {
           <ul className="mt-4 space-y-3 text-sm text-white/70">
             <li><Link href="/shop?category=Books" className="hover:text-white">Inner Work Library</Link></li>
             <li><Link href="/shop?category=Music" className="hover:text-white">Sound Medicine</Link></li>
-            <li><Link href="https://curious-zabaione-3b2724.netlify.app/" className="hover:text-white">ALKAMI Apparel</Link></li>
+            <li><Link href="/clothing" className="hover:text-white">ALKAMI Apparel</Link></li>
           </ul>
         </div>
         <div>
@@ -148,8 +148,9 @@ function Footer() {
         </div>
       </div>
       <div className="relative border-t border-white/10 px-4 py-6 text-center text-xs text-white/50">
-        © {new Date().getFullYear()} Doc Jordan&apos;s High Vibe Shop. Demo storefront, open for inspiration.
+        Â© {new Date().getFullYear()} Doc Jordan&apos;s High Vibe Shop. Demo storefront, open for inspiration.
       </div>
     </footer>
   );
 }
+

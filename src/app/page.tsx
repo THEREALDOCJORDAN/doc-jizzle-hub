@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 
 import { ProductCard } from "@/components/product-card";
 import { getFeaturedProducts, getProducts } from "@/lib/store-data";
@@ -30,7 +30,7 @@ export default async function HomePage() {
     },
     {
       title: "ALKAMI Apparel",
-      href: "https://curious-zabaione-3b2724.netlify.app/",
+      href: "/clothing",
       description: "Blue marble statement pieces made for movement, ritual, and everyday elevation.",
       image: "/images/products/alkami-hoodie.png",
       accent: "from-[#061123]/80 to-[#d6b25e]/30",
@@ -58,7 +58,7 @@ export default async function HomePage() {
               <Link href="/shop" className="rounded-full bg-[#d6b25e] px-7 py-4 text-center text-sm font-bock uppercase tracking-[0.18em] text-[#08111f] shadow-2xl shadow-[#d6b25e]/25 transition hover:-translate-y-1 hover:bg-[#f7dc8a]">
                 Shop all products
               </Link>
-              <Link href="https://curious-zabaione-3b2724.netlify.app/" className="rounded-full border border-white/20 bg-white/10 px-7 py-4 text-center text-sm font-black uppercase tracking-[0.18em] text-white backdrop-blur transition hover:-translate-y-1 hover:bg-white/20">
+              <Link href="/clothing" className="rounded-full border border-white/20 bg-white/10 px-7 py-4 text-center text-sm font-black uppercase tracking-[0.18em] text-white backdrop-blur transition hover:-translate-y-1 hover:bg-white/20">
                 Explore ALKAMI
               </Link>
             </div>
@@ -66,7 +66,7 @@ export default async function HomePage() {
               {[
                 [productCount, "Curated products"],
                 [reviewCount, "Happy reviews"],
-                ["4.9★", "Average rating"],
+                ["4.9â˜…", "Average rating"],
               ].map(([value, label]) => (
                 <div key={label} className="rounded-3xl border border-white/10 bg-white/8 p-4 backdrop-blur">
                   <p className="text-2xl font-black text-[#f7dc8a]">{value}</p>
@@ -136,7 +136,7 @@ export default async function HomePage() {
         <div className="marble-panel luxury-noise overflow-hidden rounded-[3rem] p-8 text-white shadow-2xl shadow-[#0f2f78]/20 md:p-12">
           <p className="text-sm font-black uppercase tracking-[0.26em] text-[#f7dc8a]">Doc Jordan note</p>
           <blockquote className="mt-6 text-3xl font-semibold leading-tight md:text-5xl">
-            “A high vibration is not an aesthetic. It is a daily decision to choose clarity, compassion, and creative power.”
+            â€œA high vibration is not an aesthetic. It is a daily decision to choose clarity, compassion, and creative power.â€
           </blockquote>
           <p className="mt-6 text-white/70">Books for the mind. Music for the nervous system. Apparel for the walk.</p>
         </div>
@@ -145,10 +145,10 @@ export default async function HomePage() {
             ["Small batch apparel", "ALKAMI clothing is presented as limited-run capsule pieces with premium details and energetic design language."],
             ["Recovery-informed wisdom", "Books and tools speak to change without shame, offering practical prompts for real life."],
             ["Sound-supported rituals", "Audio products are ideal for meditation, journaling, breathwork, and creative focus."],
-            ["Persistent cart", "Add products, explore more, and return later—your cart state stays with you."],
+            ["Persistent cart", "Add products, explore more, and return laterâ€”your cart state stays with you."],
           ].map(([title, body]) => (
             <div key={title} className="rounded-[2rem] border border-[eadfca] bg-white p-6 shadow-sm">
-              <div className="grid h-12 w-12 place-items-center rounded-full bg-[#111827] text-[#d6b25e]">✨</div>
+              <div className="grid h-12 w-12 place-items-center rounded-full bg-[#111827] text-[#d6b25e]">âœ¨</div>
               <h3 className="mt-5 text-xl font-semibold">{title}</h3>
               <p className="mt-3 text-sm leading-6 text-[#5b6272]">{body}</p>
             </div>
@@ -158,3 +158,4 @@ export default async function HomePage() {
     </main>
   );
 }
+

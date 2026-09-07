@@ -1,4 +1,4 @@
-import Link from "next/link";
+ï»¿import Link from "next/link";
 
 import { ProductCard } from "@/components/product-card";
 import { ShopFilters } from "@/components/shop-filters";
@@ -31,6 +31,13 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
 
   const collections = [...new Set(allProducts.map((product) => product.collection))].sort();
 
+  const categoryTabs = [
+    { label: "All", href: "/shop" },
+    { label: "Books", href: "/shop?category=Books" },
+    { label: "Music", href: "/shop?category=Music" },
+    { label: "Clothing", href: "/clothing" },
+  ];
+
   return (
     <main>
       <section className="relative overflow-hidden bg-[#08111f] px-4 py-16 text-white luxury-noise sm:px-6 lg:px-8">
@@ -39,18 +46,15 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
         <div className="relative mx-auto max-w-7xl">
           <div className="max-w-3xl">
             <p className="text-sm font-black uppercase tracking-[0.28em] text-[#f7dc8a]">The full shop</p>
-            <h1 className="mt-4 text-5xl font-semibold tracking-tight md:text-7xl">Books, music, and apparel for your next elevation.</h1>
+            <h1 className="mt-4 text-5xl font-semibold tracking-tight md:text-7xl">
+              Books, music, and apparel for your next elevation.
+            </h1>
             <p className="mt-6 text-lg leading-8 text-white/70">
               Filter by category, explore Doc Jordan&apos;s collections, and sort the catalog by price, rating, or newest arrivals.
             </p>
           </div>
           <div className="mt-10 flex flex-wrap gap-3">
-            {[
-              { label: "All", href: "/shop" },
-              { label: "Books", href: "/shop?category=Books" },
-              { label: "Music", href: "/shop?category=Music" },
-              { label: "Clothing", href: "https://curious-zabaione-3b2724.netlify.app/" },
-            ].map((item) => (
+            {categoryTabs.map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
@@ -75,13 +79,20 @@ export default async function ShopPage({ searchParams }: { searchParams: SearchP
             <p className="text-sm font-bold uppercase tracking-[0.22em] text-[#a27a29]">{products.length} products</p>
             <h2 className="mt-2 text-3xl font-semibold md:text-5xl">{category ?? "All high-vibe goods"}</h2>
           </div>
-          <p className="max-w-md text-sm leading-6 textVÈÍXŒÌ—H‚ˆ]™\H[[È›ÙXİ[˜ÛY\È]™HšXÚ[™ËØ[\H[XYÙ\Ë˜\šX[Ü[ÛœË[™İ\İÛY\ˆ™]šY]ÜË‚ˆÜ‚ˆÙ]‚‚ˆÜ›ÙXİË›[™İÈ
-ˆ]ˆÛ\ÜÓ˜[YOH›]LLÜšYØ\MˆÛN™ÜšYXÛÛËLˆÎ™ÜšYXÛÛËLÈ™ÜšYXÛÛËM‚ˆÜ›ÙXİË›X\
+        </div>
 
-›ÙXİ[™^
-HOˆ›ÙXİØ\™Ù^O^Ü›ÙXİšYH›ÙXİ^Ü›ÙXİHš[Üš]O^Ú[™^HÏŠ_BˆÙ]‚ˆ
-Hˆ
-ˆ]ˆÛ\ÜÓ˜[YOH›]LL›İ[™YVÌœ™[WH›Ü™\ˆ›Ü™\‹VÈÙXY˜ØWH™Ë]Ú]HLL^XÙ[\ˆÚYİË\ÛH‚ˆÈÛ\ÜÓ˜[YOH^L›Û\Ù[ZX›Û“›È›ÙXİÈX]ÚY]œ™\]Y[˜ŞKÚÏ‚ˆÛ\ÜÓ˜[YOH›]LÈ^VÈÍXŒÌ—H•HÛX\š[™Èš[\œÈÜˆÙX\˜Ú[™È›Üˆ›ÛÚÜË]\ÚXËÛÙYKSĞSRKÜˆ™XÛİ™\KÜ‚ˆ[šÈ™YH‹ÜÚÜˆÛ\ÜÓ˜[YOH›]Mˆ[›[™KY›^›İ[™YY[™ËVÈÌLLN×HMˆKLÈ^\ÛH›ÛX›Û^]Ú]H’eset filters</Link>
+        {products.length === 0 ? (
+          <div className="mt-16 text-center">
+            <p className="text-xl font-semibold">No products found.</p>
+            <p className="mt-3 text-[#5b6272]">Try adjusting your filters or&nbsp;
+              <Link href="/shop" className="text-[#a27a29] underline-offset-4 hover:underline">reset filters</Link>
+            </p>
+          </div>
+        ) : (
+          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {products.map((product, index) => (
+              <ProductCard key={product.id} product={product} priority={index < 3} />
+            ))}
           </div>
         )}
       </section>
